@@ -8,7 +8,6 @@ use std::marker::PhantomData;
 ///       ----------------------------------------------------------------
 ///          v_0     |         1           |      0      |       0       |
 ///          v_1     |         0           |      1      |       1       |
-///
 
 use halo2_proofs::{
     arithmetic::FieldExt, circuit::*, plonk::*, poly::Rotation
@@ -216,8 +215,9 @@ mod test {
             .titled("Range Check 1 Layout", ("sans-serif", 60))
             .unwrap();
 
-        let circuit = RangeCheckCircuit::<Fp, 8> {
+        let circuit = RangeCheckCircuit::<Fp, RANGE, NUM_BITS> {
             value: Value::unknown(),
+            lookup_value: Value::unknown(),
         };
         halo2_proofs::dev::CircuitLayout::default()
             .render(3, &circuit, &root)
